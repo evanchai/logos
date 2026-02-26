@@ -1,0 +1,73 @@
+import type { FigureId, FigureTheme } from './types'
+
+export const THEMES: Record<FigureId, FigureTheme> = {
+  god: {
+    id: 'god',
+    name: 'God',
+    nameCn: '上帝',
+    subtitle: 'The Bible & Christianity',
+    subtitleCn: '圣经与基督教',
+    avatar: '/avatar-god.png',
+    accentColor: '#C8A23D',
+    bgGradient: 'linear-gradient(180deg, #FFFDF5 0%, #FFF8E7 100%)',
+    bubbleAssistantBg: '#FDF6E3',
+    bubbleAssistantColor: '#3D2E1A',
+    bubbleUserBg: 'linear-gradient(135deg, #C8A23D, #E8C94A)',
+    bubbleUserColor: '#FFFDF5',
+    headerBorder: '#E8D9A0',
+    inputBorderFocus: '#C8A23D',
+    typingDotColor: '#C8A23D',
+    welcomeText: 'Ask, and it shall be given unto you. Seek, and ye shall find.',
+    welcomeTextCn: '你们祈求，就给你们；寻找，就寻见。',
+    placeholder: 'Speak to the Lord...',
+    placeholderCn: '向主诉说...',
+  },
+  buddha: {
+    id: 'buddha',
+    name: 'Shakyamuni Buddha',
+    nameCn: '释迦牟尼',
+    subtitle: 'Buddhist Dharma',
+    subtitleCn: '佛法',
+    avatar: '/avatar-buddha.png',
+    accentColor: '#B8860B',
+    bgGradient: 'linear-gradient(180deg, #F7FAF5 0%, #EFF5E7 100%)',
+    bubbleAssistantBg: '#F0EDE5',
+    bubbleAssistantColor: '#2D2B26',
+    bubbleUserBg: 'linear-gradient(135deg, #7B8C56, #A4B06B)',
+    bubbleUserColor: '#F7FAF5',
+    headerBorder: '#D4CDB8',
+    inputBorderFocus: '#B8860B',
+    typingDotColor: '#B8860B',
+    welcomeText: 'Peace comes from within. Do not seek it without.',
+    welcomeTextCn: '宁静来自内心，勿向外求。',
+    placeholder: 'Seek the Dharma...',
+    placeholderCn: '问道...',
+  },
+  allah: {
+    id: 'allah',
+    name: 'Allah',
+    nameCn: '真主安拉',
+    subtitle: 'The Quran & Islam',
+    subtitleCn: '古兰经与伊斯兰教',
+    avatar: '/avatar-allah.png',
+    accentColor: '#1A6B5A',
+    bgGradient: 'linear-gradient(180deg, #F5F8FA 0%, #E8F0F2 100%)',
+    bubbleAssistantBg: '#E8F4F0',
+    bubbleAssistantColor: '#1A2E2A',
+    bubbleUserBg: 'linear-gradient(135deg, #1A6B5A, #2E8B7A)',
+    bubbleUserColor: '#F5F8FA',
+    headerBorder: '#B8D4CC',
+    inputBorderFocus: '#1A6B5A',
+    typingDotColor: '#1A6B5A',
+    welcomeText: 'In the remembrance of Allah do hearts find rest.',
+    welcomeTextCn: '唯有记念安拉，心灵才能安宁。',
+    placeholder: 'Speak to the Most Merciful...',
+    placeholderCn: '向至仁主诉说...',
+  },
+}
+
+export function getTheme(id: FigureId): FigureTheme {
+  return THEMES[id]
+}
+
+export const FIGURE_IDS: FigureId[] = ['god', 'buddha', 'allah']
