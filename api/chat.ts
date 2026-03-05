@@ -1,10 +1,18 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { Redis } from "@upstash/redis";
+import { Ratelimit } from "@upstash/ratelimit";
 import {
   GOD_SYSTEM, GOD_INSTRUCTION,
   BUDDHA_SYSTEM, BUDDHA_INSTRUCTION,
   ALLAH_SYSTEM, ALLAH_INSTRUCTION,
 } from "./prompts.js";
+
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(20, "1 m"),
+  prefix: "rl:logos",
+});
 
 type FigureId = "god" | "buddha" | "allah";
 
@@ -17,6 +25,12 @@ const PROMPTS: Record<FigureId, { system: string; instruction: string }> = {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() || "unknown";
+  const { success } = await ratelimit.limit(ip);
+  if (!success) {
+    return res.status(429).json({ error: "Too many requests. Please try again later." });
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
